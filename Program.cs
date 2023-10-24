@@ -8,13 +8,13 @@ Translator.Initialize();
 //ContentGenerator.StartTextItemsGeneration();
 //ContentGenerator.StartMenuItemsGeneration();
 
-Translator.DownloadAllAudio();
+//Translator.DownloadAllAudio();
 
 //7369
 //9441
 //
 
-//Parser.Parse();
+Parser.Parse();
 
 Console.WriteLine("DONE");
 Console.ReadLine();

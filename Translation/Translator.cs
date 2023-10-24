@@ -11,7 +11,7 @@ namespace KrivojPerevodDS3.Translation
 {
     public static class Translator
     {
-        const string forbiddenSymbols = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM&<>[]()%";
+        public const string ForbiddenSymbols = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM&<>[]()%";
         const string _folder = "b1gk2v7ejpmn4ch4adg5";
         const string _apiURL = "https://translate.api.cloud.yandex.net/translate/v2/translate";
         const string _audioApiUrl = "https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize?folderId=b1gk2v7ejpmn4ch4adg5&text={0}&voice={1}&format=mp3";
@@ -214,7 +214,7 @@ namespace KrivojPerevodDS3.Translation
             !string.IsNullOrEmpty(e.OriginalText) &&
             !string.IsNullOrEmpty(e.OriginalText.Trim())).ToList();
 
-            result = result.Where(e => !e.OriginalText.Any(s => forbiddenSymbols.Contains(s))).ToList();
+            result = result.Where(e => !e.OriginalText.Any(s => ForbiddenSymbols.Contains(s))).ToList();
 
             result = result.GroupBy(e => e.OriginalText).Select(e =>
                 new PhraseModel()

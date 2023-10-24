@@ -10,8 +10,11 @@ namespace KrivojPerevodDS3.XML
     [System.Xml.Serialization.XmlRoot("fmg")]
     public class XMLMainDocument
     {
-        public string OriginalFileName { get; set; }
-        public string ConvertedFileName { get; set; }
+        [XmlElement]
+        public string OriginalFileName;
+
+        [XmlElement]
+        public string ConvertedFileName;
 
         [XmlElement]
         public string compression { get; set; }

@@ -54,6 +54,25 @@ namespace KrivojPerevodDS3.XML
             }
         }
 
+        public static void WriteXml2(string path, XMLMainDocument data)
+        {
+            string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<fmg>\n<compression>None</compression>\n<version>DarkSouls3</version>\n<bigendian>False</bigendian>\n<entries>";
+            foreach (var item in data.entries)
+            {
+                string text = item.text == null ? null : item.text.Replace("<", "").Replace(">", "").Replace("&", "");
+                xml += $"<text id=\"{item.id}\">{text}</text>\n";
+            }
+            xml += "</entries></fmg>";
+
+            File.WriteAllText(path, xml);
+
+            /*XmlSerializer xmlSerializer = new XmlSerializer(typeof(XMLMainDocument));
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                xmlSerializer.Serialize(fs, data);
+            }*/
+        }
+
         public static void WriteXml(string path, List<PhraseModel> phrases)
         {
             XMLMainDocument data = new XMLMainDocument()
@@ -63,6 +82,10 @@ namespace KrivojPerevodDS3.XML
                 version = "DarkSouls3",
                 entries = phrases.Select(p => new XMLPhrase() { id = p.Id, text = p.TranslatedText }).ToArray()
             };
+
+            if(File.Exists(path))
+                File.Delete(path);
+
             WriteXml(path, data);
         }
     }
